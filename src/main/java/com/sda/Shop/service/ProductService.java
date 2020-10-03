@@ -5,11 +5,12 @@ import com.sda.Shop.dto.CreateProductDto;
 import com.sda.Shop.dto.UpdateProductDto;
 import com.sda.Shop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Scope(value = "prototype")
 @Service
 public class ProductService {
 
@@ -35,7 +36,7 @@ public class ProductService {
     }
 
     public List<Product> getAll() {
-        return repository.getAll();
+        return repository.findAll();
 
     }
 
@@ -44,16 +45,20 @@ public class ProductService {
     }
 
     public Product findById(Long id) {
-        return repository.findById(id);
+        return repository.getOne(id);
     }
 
     public Product editProduct(Long id, UpdateProductDto updateProductDto) {
-        return repository.editProduct(id, updateProductDto);
+        Product product = repository.getOne(id);
+        product.setPrice(updateProductDto.getPrice());
+        product.setQuantity(updateProductDto.getQuantity());
+        product.setDescription(updateProductDto.getDescription());
+        return repository.save(product);
 
     }
 
     public List<Product> getProductByName(String name) {
-        return repository.getProductByName(name);
+
 
     }
 
