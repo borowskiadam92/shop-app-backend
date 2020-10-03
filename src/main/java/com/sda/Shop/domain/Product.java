@@ -1,27 +1,27 @@
 package com.sda.Shop.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity
 @Builder
-@Getter
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Product {
 
-    @Setter
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Setter
     private String name;
-    @Setter
     private BigDecimal price;
-    @Setter
     private Integer quantity;
-    @Setter
     private String description;
 
     private Category category;

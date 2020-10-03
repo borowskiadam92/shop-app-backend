@@ -16,6 +16,7 @@ public class ProductService {
 
     private final ProductRepository repository;
 
+
     @Autowired
     public ProductService(ProductRepository repository) {
         this.repository = repository;
@@ -57,8 +58,8 @@ public class ProductService {
 
     }
 
-    public List<Product> getProductByName(String name) {
-
+    public List<Product> findAllByName(String name) {
+       return repository.findAllByName(name);
 
     }
 
